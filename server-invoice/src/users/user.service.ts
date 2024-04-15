@@ -3,14 +3,16 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 export class UserService {
-  constructor(private readonly prisma: PrismaClient) {}
+  private readonly prisma: PrismaClient;
 
+  constructor() {
+    this.prisma = new PrismaClient();
+  }
   async createUser(createUserDto: CreateUserDto): Promise<any> {
     return this.prisma.user.create({ data: createUserDto });
   }
 
   async getUsers(): Promise<User[]> {
-    console.log(this.prisma);
     return this.prisma.user.findMany();
   }
 
