@@ -24,6 +24,12 @@ export class InvoicesController {
     return this.invoiceService.getInvoices();
   }
 
+  @Get('total')
+  async getTotal() {
+    console.log('here');
+    return await this.invoiceService.getUnpaidInvoicesWithTotalAmount();
+  }
+
   @Get(':id')
   async getUserById(@Param('id') id: string) {
     return this.invoiceService.getInvoiceById(id);

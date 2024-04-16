@@ -9,6 +9,9 @@ export class AuthService {
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.prisma.user.findUnique({
       where: { email },
+      include: {
+        invoices: true,
+      },
     });
     if (user && user.password === password) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
